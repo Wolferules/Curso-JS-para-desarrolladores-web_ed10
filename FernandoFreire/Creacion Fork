@@ -7,4 +7,6 @@ Para crear un Fork: A diferencia del primer dia donde todos tirabamos al mismo r
 5. Lo añadimos con git add.
 6. Hacemos git commit -m "Descripción cambio"
 7. Git push para subir el archivo. Ahora ya está en mi repositorio.
-8. Me voy al repositorio principal
+8. Me voy al repositorio principal. Hago una pull request desde mi repositorio hacia master.
+9. Pulso en compare across forks y en head fork elijo Wolferules para que vaya a Master.
+10. Una vez creada, solo tendrán que aceptarla y mergear.
