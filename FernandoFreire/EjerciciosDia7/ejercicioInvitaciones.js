@@ -14,6 +14,7 @@ if (estaIncluidoEvento == "baja") {
 			if (listaIds[i] == dimeId) {
 				listaIds[i] == undefined;
 				console.log("Usted, con el nombre " + dimeNombre + " ha sido eliminado.");
+				break;
 			} else {
 				alert("El nombre que me has dado no aparece entre los invitados");
 				break;
@@ -25,8 +26,10 @@ if (estaIncluidoEvento == "baja") {
 		for (var i = 0; i <= listaIds.length; i++) {
 				console.log(i);
 				if(listaIds[i] == undefined) {
+					console.log(i);
 					listaIds.push(dimeNombre);
 					console.log("Su nombre ha sido incluido en el evento");
+					break;
 				}	
 			}	
 	}
