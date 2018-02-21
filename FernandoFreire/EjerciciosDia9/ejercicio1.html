@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ejercicio 1 de llamada API</title>
+
+	<script type="text/javascript">
+
+		function peticionAjax(url) {
+        var xmlHttp = new XMLHttpRequest();
+
+        xmlHttp.onreadystatechange = function() {
+
+            if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+            	var datosBrutos = JSON.parse(xmlHttp.responseText);
+            	datosConcretosZona1 = datosBrutos[0].name;
+            	var datosConcretosArbol1 = datosBrutos[0].parametros.Fresno;
+            	var datosConcretosMedio1 = datosBrutos[0].parametros.Fresno.medio;
+            	var datosConcretosAlto1 = datosBrutos[0].parametros.Fresno.alto;
+            	var datosConcretosMuyAlto1 = datosBrutos[0].parametros.Fresno.muy_alto;
+
+            	var zona = document.getElementById("zona");
+            	zona.innerHTML = datosConcretosZona1;
+
+            	var arbol1 = document.getElementById("arbol1");
+            	arbol1.innerHTML = datosConcretosArbol1;
+
+
+            } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
+                console.error("ERROR! 404");
+                console.info(JSON.parse(xmlHttp.responseText));
+            }
+	        };
+	        xmlHttp.open("GET", url, true);
+	        xmlHttp.send();
+	    }
+
+	    peticionAjax("http://airemad.com/api/v1/pollen");
+
+	</script>
+
+</head>
+<body>
+
+	<div>
+		<table>
+			<tr>
+				<td id="zona" colspan='4'></td>
+			</tr>
+			<tr>
+				<td>Arboles</td><td>Medio</td><td>Alto</td><td>Muy alto</td>
+			</tr>
+			<tr>
+				<td id="arbol1"></td><td id="medio1"></td><td id="alto1"></td><td id="muyalto1"></td>
+			</tr>
+
+		</table>
+
+
+	</div>
+
+</body>
+</html>
