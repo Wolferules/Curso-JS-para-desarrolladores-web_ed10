@@ -3,96 +3,7 @@
 <head>
 	<title>Ejercicio 1 de llamada API</title>
 
-	<script type="text/javascript">
 
-		function peticionAjax(url) {
-        var xmlHttp = new XMLHttpRequest();
-
-        xmlHttp.onreadystatechange = function() {
-
-            if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-            	var datosBrutos = JSON.parse(xmlHttp.responseText);
-
-            	var col = [];
-            	for (var i = 0; i < datosBrutos.results.length; i++) {
-            		for ( var key in datosBrutos.results[i]) {
-            			if (key == "gender" || key == "name" || key == "email" || key == "phone" || key == "picture") {
-            				if (col.indexOf(key) == -1) {
-            					col.push(key);
-            				}
-            			}
-            		}
-            	}
-
-            	var tabla = document.createElement("table");
-
-            	var tr = tabla.insertRow(-1);
-
-            	for (var i = 0; i < col.length; i++) {
-            		var columnaHeader = document.createElement("th");
-            		columnaHeader.innerHTML = col[i];
-            		tr.appendChild(columnaHeader);
-            	}
-
-
-            	for (var i = 0; i < datosBrutos.results.length; i++) {
-            		var tr = tabla.insertRow(-1);
-
-            		for (var j = 0; j < col.length; j++) {
-            			console.log(col[j]);
-            			var celda = tr.insertCell(-1);
-            			if(col[j] == "picture") {
-            				var imagen = document.createElement("img");
-            				var foto = datosBrutos.results[i][col[j]].large;
-            				var contenido_imagen = imagen.setAttribute("src", foto);
-            				var id_imagen = imagen.setAttribute("id","imagenPerfil");
-            				celda.appendChild(imagen);
-
-            			} 
-						else if(col[j] == "name") {
-							celda.innerHTML = datosBrutos.results[i][col[j]].first + datosBrutos.results[i][col[j]].last;
-
-						} else {
-            				celda.innerHTML = datosBrutos.results[i][col[j]];
-            			}
-            			
-            		}
-            	}
-
-
-
-
-            	var div_container = document.getElementById("tabla");
-            	div_container.innerHTML = "";
-            	div_container.appendChild(tabla); 
-
-            	function verDetalle() {
-            		var foto = document.getElementById("detalleFoto");
-            		foto.innerHTML = datosBrutos.results[0].picture.large;
-            	}
-
-
-            	function load() {
-            		var fotoPulsada = document.getElementById("imagenPerfil");
-            		fotoPulsada.addEventListener("click", verDetalle, false);
-            	}
-
-
-            	document.addEventListener("DOMContentLoaded", load, false);
-
-
-            } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
-                console.error("ERROR! 404");
-                console.info(JSON.parse(xmlHttp.responseText));
-            }
-	        };
-	        xmlHttp.open("GET", url, true);
-	        xmlHttp.send();
-	    }
-
-	    peticionAjax("https://randomuser.me/api");
-
-	</script>
 
 	<style>
         table, th, td 
@@ -116,6 +27,8 @@
 
 	<h1>Perfil aleatorio</h1>
 
+    <button id="botonPerfil">Pulsa para ver el perfil</button>
+
 	<div id="tabla">
 
 	</div>
@@ -123,6 +36,86 @@
 	<div id="detalleFoto">
 		
 	</div>
+    <script type="text/javascript">
 
+        function peticionAjax(url) {
+        var xmlHttp = new XMLHttpRequest();
+
+        xmlHttp.onreadystatechange = function() {
+
+            if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+                var datosBrutos = JSON.parse(xmlHttp.responseText);
+
+                var col = [];
+                for (var i = 0; i < datosBrutos.results.length; i++) {
+                    for ( var key in datosBrutos.results[i]) {
+                        if (key == "gender" || key == "name" || key == "email" || key == "phone" || key == "picture") {
+                            if (col.indexOf(key) == -1) {
+                                col.push(key);
+                            }
+                        }
+                    }
+                }
+
+                var tabla = document.createElement("table");
+
+                var tr = tabla.insertRow(-1);
+
+                for (var i = 0; i < col.length; i++) {
+                    var columnaHeader = document.createElement("th");
+                    columnaHeader.innerHTML = col[i];
+                    tr.appendChild(columnaHeader);
+                }
+
+
+                for (var i = 0; i < datosBrutos.results.length; i++) {
+                    var tr = tabla.insertRow(-1);
+
+                    for (var j = 0; j < col.length; j++) {
+                        var celda = tr.insertCell(-1);
+                        if(col[j] == "picture") {
+                            var imagen = document.createElement("img");
+                            var foto = datosBrutos.results[i][col[j]].large;
+                            var contenido_imagen = imagen.setAttribute("src", foto);
+                            var id_imagen = imagen.setAttribute("id","imagenPerfil");
+                            celda.appendChild(imagen);
+
+                        } 
+                        else if(col[j] == "name") {
+                            celda.innerHTML = datosBrutos.results[i][col[j]].first + datosBrutos.results[i][col[j]].last;
+
+                        } else {
+                            celda.innerHTML = datosBrutos.results[i][col[j]];
+                        }
+                        
+                    }
+                }
+
+                var div_container = document.getElementById("tabla");
+                div_container.innerHTML = "";
+                div_container.appendChild(tabla); 
+
+            } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
+                console.error("ERROR! 404");
+                console.info(JSON.parse(xmlHttp.responseText));
+            }
+            };
+            xmlHttp.open("GET", url, true);
+            xmlHttp.send();
+        }
+
+
+        function load() {
+            peticionAjax('https://randomuser.me/api')
+
+            
+        }
+
+        var botonIniciar = document.getElementById("botonPerfil");
+        botonIniciar.addEventListener("click", load , false);
+        //document.addEventListener("click", load, false);
+
+
+    </script>
 </body>
 </html>

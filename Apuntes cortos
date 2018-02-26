@@ -1,0 +1,51 @@
+El $scope de las variables viene determinado por las llaves. No tiene tanto que ver con las funciones sino que puede estar presente también en bucles, condicionales, etc.
+
+Event listener. Permite atender un evento en un elemento DOM determinado
+
+document.ElementById("hplogo").addEventListener("click",function() {alert("Hola")});
+
+Endpoint: es una direccion a la que pides algo. Suele pedir información a la API, que le proporciona datos.
+Cuando hacemos la llamada a la API, con la url en el navegador, podemos ir a Network en la consola para saber que datos recibimos.
+
+Objeto: es como un array entre corchetes que lleva un nombre en vez de un identificador. 
+
+Await: Espera a que se ejecute la función a continuación.
+
+
+
+async function pilladatos () {
+  const url = 'https://randomuser.me/api/?results=10';
+  let firstData = await fetch(url);
+  // only proceed once promise is resolved
+  let data = await respofirstData.json();
+  // only proceed once second promise is resolved
+  return data;
+}
+
+
+fetch() pide en la url los datos. Cuando pide los datos,vuelve a esperar para transformar ese output en json.
+
+
+
+Mayusculas
+cervantes.toUpperCase().lastIndexOf("U".toUpperCase());
+
+Objetos: una propiedad puede ser un metodo. Para llamarlos miObjeto.saludar();
+Clase Object: todos los objetos son de esa clase. defineProperties permite caracterizar las propiedades.
+
+
+Funciones anónimas autoejecutables
+Es un trozo de codigo encapsulado que se ejecuta a si mismo y que nadie lo puede llamar.
+
+
+Funciones recursivas
+Bucles de funciones
+
+
+
+Nodo
+
+Propagación: todo el paso que va desde el Document hasta el elemento y cuando sube.
+preventDefault() evita el comportamiento por defecto por el que se le aplica a esta funcion.
+
+
